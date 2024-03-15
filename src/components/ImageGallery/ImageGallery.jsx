@@ -22,29 +22,32 @@ const ImageGallery = ({
     baseURL: baseUrl,
     headers: { Authorization: `Client-ID ${apiKey}` },
   });
-  console.log("Image Gallery!");
 
   useEffect(() => {
-    console.log("UseEffect!", search);
-
     const fetchImages = async () => {
       try {
         onLoading(true);
-        console.log("isLoading: true");
+        onError(null);
+
         const response = await instance.get("search/photos", {
           params: { page: currentPage, per_page: 12, query: search },
         });
+        if (response.data.results.length === 0) {
+          onLoading(false);
+          onError("Sorry but there is nothing to load for your query");
+          return;
+        }
         setImages((prevImages) =>
           currentPage === 1
             ? response.data.results
             : [...prevImages, ...response.data.results]
         );
+
         onTotalPage(response.data.total_pages);
       } catch (error) {
         onError(error);
       } finally {
         onLoading(false);
-        console.log("isLoading: false");
       }
     };
 

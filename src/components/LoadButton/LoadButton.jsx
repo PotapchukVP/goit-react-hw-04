@@ -2,7 +2,6 @@
 import css from "./LoadButton.module.css";
 
 const LoadButton = ({ onClick }) => {
-  console.log("onClick:");
   return (
     <div>
       <button className={css.loadButton} onClick={onClick}>

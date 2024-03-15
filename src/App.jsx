@@ -24,7 +24,7 @@ function App() {
   return (
     <>
       <SearchBar onSearch={handleSearch}></SearchBar>
-      {error && <ErrorMessage />}
+      {error && <ErrorMessage error={error} />}
       {search && (
         <ImageGallery
           key={key}
