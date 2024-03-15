@@ -6,3 +6,8 @@
   row-gap: 10px;
   column-gap: 10px;
 }
+
+ul,
+ol {
+  list-style: none;
+}
