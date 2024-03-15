@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useState } from "react";
+import SearchBar from "./components/SearchBar/SearchBar.jsx";
+import ImageGallery from "./components/ImageGallery/ImageGallery.jsx";
+import LoadButton from "./components/LoadButton/LoadButton.jsx";
+import Loader from "./components/Loader/Loader.jsx";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState("");
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [key, setKey] = useState(Date.now());
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleSearch = (value) => {
+    setSearch(value);
+    setCurrentPage(1);
+    setTotalPage(0);
+    setKey(Date.now());
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <SearchBar onSearch={handleSearch}></SearchBar>
+      {error && <ErrorMessage />}
+      {search && (
+        <ImageGallery
+          key={key}
+          search={search}
+          currentPage={currentPage}
+          onTotalPage={setTotalPage}
+          onLoading={setIsLoading}
+          onError={setError}
+        />
+      )}
+      {isLoading && <Loader />}
+      {currentPage < totalPage && (
+        <LoadButton
+          onClick={() => {
+            setCurrentPage((prevPage) => prevPage + 1);
+          }}
+        />
+      )}
     </>
-  )
+  );
 }
 
-export default App
+export default App;

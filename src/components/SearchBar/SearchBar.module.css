@@ -1,0 +1,43 @@
+.searchContainer {
+  width: 100%;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  background-color: rgba(34, 34, 130, 0.875);
+  box-shadow: 0px 2px 5px rgba(13, 13, 13, 0.683);
+}
+
+.searchField {
+  background-color: white;
+  font-family: "Helvetica";
+  font-size: 16px;
+  font-weight: 400;
+  color: black;
+  width: 280px;
+  border: none;
+}
+
+.searchField:focus {
+  outline: none;
+}
+
+.searchButton {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  color: black;
+  border: none;
+  box-sizing: border-box;
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  height: 30px;
+  background-color: white;
+}

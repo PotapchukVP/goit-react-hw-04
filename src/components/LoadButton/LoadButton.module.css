@@ -1,0 +1,11 @@
+.loadButton {
+  width: 120px;
+  height: 40px;
+  background-color: rgba(29, 40, 138, 0.828);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+}
