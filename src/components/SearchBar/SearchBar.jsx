@@ -2,13 +2,17 @@ import css from "./SearchBar.module.css";
 import { Formik, Form, Field } from "formik";
 import { IoSearch } from "react-icons/io5";
 
-const SearchBar = ({ onSearch }) => {
+const SearchBar = ({ onSearch, onError }) => {
   return (
     <Formik
       initialValues={{ userSearch: "" }}
       onSubmit={(values, actions) => {
+        const userInput = values.userSearch;
         actions.resetForm();
-        onSearch(values.userSearch);
+
+        userInput.trim() !== ""
+          ? onSearch(userInput)
+          : onError("Please enter a search query");
       }}
     >
       <Form className={css.searchContainer}>
